@@ -17,8 +17,9 @@ class MainActivity : AppCompatActivity() {
 //        setContentView(R.layout.activity_main)
         val homeViewModel = ViewModelProviders.of(this).get(HomeViewModel1::class.java)
         // lifecycle.addObserver(this)
-        homeViewModel.mutableLiveData.observe(this) {
+        // TODO : The callback can be ignored in Kotlin
+        homeViewModel.mutableLiveData.observe(this, onChanged = {
             it.length
-        }
+        })
     }
 }
