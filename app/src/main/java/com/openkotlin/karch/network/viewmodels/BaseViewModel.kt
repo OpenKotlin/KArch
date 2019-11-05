@@ -43,7 +43,7 @@ open class BaseViewModel : ViewModel() {
      */
     fun handlingExceptions(e: Throwable) {
 
-        // TODO : Adding a debug to here
+        // TODO : Adding a debug to here, Should be removed when the library is ready to go - Tanck
         Log.e("Tanck", e.message)
 
         when (e) {

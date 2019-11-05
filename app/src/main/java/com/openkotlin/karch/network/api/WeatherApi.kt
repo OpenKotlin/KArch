@@ -24,5 +24,6 @@ interface WeatherApi {
     }
 
     @GET("weather/city/101030100")
-    suspend fun getWeatherByCity(): BaseResponse<GetWeatherReq>
+//    suspend fun getWeatherByCity(): BaseResponse<GetWeatherReq>
+    suspend fun getWeatherByCity(): GetWeatherReq
 }
