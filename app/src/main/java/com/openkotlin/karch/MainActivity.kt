@@ -11,23 +11,25 @@ import com.openkotlin.karch.viewmodels.HomeViewModel
 
 class MainActivity : AppCompatActivity() {
 
+    private val TAG: String = MainActivity::class.java.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val activityMainBinding =
             DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
                 .apply {
-                    viewModel = ViewModelProviders.of(this@MainActivity).get(HomeViewModel::class.java)
+                    viewModel =
+                        ViewModelProviders.of(this@MainActivity).get(HomeViewModel::class.java)
                 }
-
 
 
         // TODO : The callback can be ignored in Kotlin
 //        viewModel.mutableLiveData.observe(this, onChanged = {
 //
 //        })
-        activityMainBinding.viewModel!!.mutableLiveData.observe(this) {
-            Log.d("Tanck", it)
+        activityMainBinding.viewModel?.mutableLiveData?.observe(this) {
+            Log.d(TAG, it)
+            activityMainBinding.viewModel?.name = "Dynamic String form the observe"
         }
 
 
