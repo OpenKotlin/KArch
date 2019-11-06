@@ -4,7 +4,7 @@ import com.openkotlin.karch.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.jackson.JacksonConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 /**
@@ -59,7 +59,8 @@ abstract class BaseRetrofitClient {
         // This is struct has break the restful
         return Retrofit.Builder().apply {
             client(innerClient)
-            addConverterFactory(JacksonConverterFactory.create())
+//            addConverterFactory(JacksonConverterFactory.create())
+            addConverterFactory(GsonConverterFactory.create())
             baseUrl(baseUrl)
         }.build().create(serviceClass)
     }
