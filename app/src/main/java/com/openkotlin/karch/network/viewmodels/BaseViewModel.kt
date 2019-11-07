@@ -1,10 +1,9 @@
 package com.openkotlin.karch.network.viewmodels
 
-import android.util.Log
+//import com.fasterxml.jackson.core.JsonParseException
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonParseException
-//import com.fasterxml.jackson.core.JsonParseException
 import kotlinx.coroutines.*
 import java.net.SocketTimeoutException
 
