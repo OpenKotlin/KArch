@@ -3,6 +3,8 @@ package com.openkotlin.karch.network.viewmodels
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.openkotlin.karch.network.data.WeatherRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  *
@@ -13,7 +15,7 @@ import com.openkotlin.karch.network.data.WeatherRepository
  *  Note : N/A
  *
  */
-class WeatherViewModel: BaseViewModel() {
+class WeatherViewModel : BaseViewModel() {
 
 
     private val repository by lazy { WeatherRepository() }
@@ -25,7 +27,7 @@ class WeatherViewModel: BaseViewModel() {
     }
 
     private fun updateWeatherToView() {
-        launchOnMain(
+        launchOnIO(
             tryBlock = {
                 Log.d("Tanck", "tryBlock Block")
                 val serverMsg = repository.getWeather().also {
@@ -45,12 +47,13 @@ class WeatherViewModel: BaseViewModel() {
 //                        mData = value;
 //                        dispatchingValue(null);
 //                    }
-                    msg.value = it.message
+                    // Switch to MAIN thread when the data backed
+                    withContext(Dispatchers.Main) { msg.value = it.message }
                 }
                 Log.d("Tanck", "tryBlock Block: $serverMsg")
             },
-            catchBlock = {
-                e->handlingExceptions(e)
+            catchBlock = { e ->
+                handlingExceptions(e)
                 Log.d("Tanck", "catchBlock Block")
             },
             finallyBlock = {
