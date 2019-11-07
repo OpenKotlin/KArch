@@ -2,7 +2,10 @@ package com.openkotlin.karch.network.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.openkotlin.karch.network.data.WeatherRepository
+import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  *
@@ -14,7 +17,6 @@ import com.openkotlin.karch.network.data.WeatherRepository
  *
  */
 class WeatherViewModel: BaseViewModel() {
-
 
 
     private val repository by lazy { WeatherRepository() }
@@ -31,6 +33,10 @@ class WeatherViewModel: BaseViewModel() {
                 Log.d("Tanck", "tryBlock Block")
                 val serverMsg = repository.getWeather().also {
                     msg.value = it.message
+//                    msg.observe(this@MainActivity) {
+//                        Log.d(TAG, "The data has been changed : $it")
+//                        tv_value.text = it
+//                    }
                 }
                 Log.d("Tanck", "tryBlock Block: $serverMsg")
             },

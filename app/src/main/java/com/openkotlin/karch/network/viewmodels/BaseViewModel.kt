@@ -63,6 +63,12 @@ open class BaseViewModel : ViewModel() {
         catchBlock: suspend CoroutineScope.(e: Throwable) -> Unit = {},
         finallyBlock: suspend CoroutineScope.() -> Unit = {}
     ) {
+        /**
+         * [CoroutineScope] tied to this [ViewModel].
+         * This scope will be canceled when ViewModel will be cleared, i.e [ViewModel.onCleared] is called
+         *
+         * This scope is bound to [Dispatchers.Main]
+         */
         viewModelScope.launch(Dispatchers.Main) {
             tryCatch(tryBlock, catchBlock, finallyBlock)
         }
@@ -73,5 +79,7 @@ open class BaseViewModel : ViewModel() {
      */
     override fun onCleared() {
         super.onCleared()
+        // Note: Please remember invoke the `cancel` method when the onCleared is invoked
+        viewModelScope.cancel()
     }
 }
