@@ -27,7 +27,7 @@ class WeatherViewModel : BaseViewModel() {
     }
 
     private fun updateWeatherToView() {
-        launchOnMain(
+        launchOnIO(
             tryBlock = {
                 Log.d("Tanck", "tryBlock Block")
 //                val serverMsg = repository.getWeather().also {
@@ -53,7 +53,9 @@ class WeatherViewModel : BaseViewModel() {
                 // 1. Try with server to get data
                 val serverMsg = repository.getWeather()
                 // 2. Update the data to live data
-                msg.value = serverMsg.message
+                // Switch to the UI thread
+                msg.postValue(serverMsg.message)
+//                msg.value = serverMsg.message
                 Log.d("Tanck", "tryBlock Block: $serverMsg")
             },
             catchBlock = { e ->
