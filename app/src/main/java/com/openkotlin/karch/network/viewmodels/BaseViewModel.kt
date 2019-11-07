@@ -45,13 +45,17 @@ open class BaseViewModel : ViewModel() {
     fun handlingExceptions(e: Throwable) {
 
         // TODO : Adding a debug to here, Should be removed when the library is ready to go - Tanck
-        Log.e("Tanck", e.message)
+//        Log.e("Tanck", e.message)
 
         when (e) {
-            is CancellationException -> {}
-            is SocketTimeoutException -> {}
-            is JsonParseException -> {}
-            else -> {}
+            is CancellationException -> {
+            }
+            is SocketTimeoutException -> {
+            }
+            is JsonParseException -> {
+            }
+            else -> {
+            }
         }
     }
 
@@ -88,7 +92,7 @@ open class BaseViewModel : ViewModel() {
          *
          * This scope is bound to [Dispatchers.Main]
          */
-        viewModelScope.launch{
+        viewModelScope.launch {
             tryCatch(tryBlock, catchBlock, finallyBlock)
         }
     }
