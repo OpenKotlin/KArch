@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // The findViewByID api can be ignored. This is extensions function.
         tv_value.setTextColor(resources.getColor(R.color.colorAccent))
 
 //        val activityMainBinding =
