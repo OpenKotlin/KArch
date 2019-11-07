@@ -69,7 +69,26 @@ open class BaseViewModel : ViewModel() {
          *
          * This scope is bound to [Dispatchers.Main]
          */
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.IO) {
+            tryCatch(tryBlock, catchBlock, finallyBlock)
+        }
+    }
+
+    /**
+     * The block will running on the MAIN of dispatcher
+     */
+    fun launchOnMain(
+        tryBlock: suspend CoroutineScope.() -> Unit,
+        catchBlock: suspend CoroutineScope.(e: Throwable) -> Unit = {},
+        finallyBlock: suspend CoroutineScope.() -> Unit = {}
+    ) {
+        /**
+         * [CoroutineScope] tied to this [ViewModel].
+         * This scope will be canceled when ViewModel will be cleared, i.e [ViewModel.onCleared] is called
+         *
+         * This scope is bound to [Dispatchers.Main]
+         */
+        viewModelScope.launch{
             tryCatch(tryBlock, catchBlock, finallyBlock)
         }
     }

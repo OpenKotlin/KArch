@@ -12,7 +12,6 @@ class MainActivity : AppCompatActivity() {
 
     private val TAG: String = MainActivity::class.java.simpleName
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -22,6 +21,8 @@ class MainActivity : AppCompatActivity() {
                 tv_value.text = it
             }
         }
+
+        tv_value.setTextColor(resources.getColor(R.color.colorAccent))
 
 //        val activityMainBinding =
 //            DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
@@ -40,6 +41,5 @@ class MainActivity : AppCompatActivity() {
 //        }
 
     }
-
 
 }

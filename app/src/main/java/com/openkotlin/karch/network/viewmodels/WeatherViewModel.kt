@@ -2,10 +2,7 @@ package com.openkotlin.karch.network.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
 import com.openkotlin.karch.network.data.WeatherRepository
-import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  *
@@ -28,15 +25,27 @@ class WeatherViewModel: BaseViewModel() {
     }
 
     private fun updateWeatherToView() {
-        launchOnIO(
+        launchOnMain(
             tryBlock = {
                 Log.d("Tanck", "tryBlock Block")
                 val serverMsg = repository.getWeather().also {
-                    msg.value = it.message
-//                    msg.observe(this@MainActivity) {
-//                        Log.d(TAG, "The data has been changed : $it")
-//                        tv_value.text = it
+                    // TODO : This block working on the UI thread.
+                    /**
+                     * Sets the value. If there are active observers, the value will be dispatched to them.
+                     * <p>
+                     * This method must be called from the main thread. If you need set a value from a background
+                     * thread, you can use {@link #postValue(Object)}
+                     *
+                     * @param value The new value
+                     */
+//                    @MainThread
+//                    protected void setValue(T value) {
+//                        assertMainThread("setValue");
+//                        mVersion++;
+//                        mData = value;
+//                        dispatchingValue(null);
 //                    }
+                    msg.value = it.message
                 }
                 Log.d("Tanck", "tryBlock Block: $serverMsg")
             },
