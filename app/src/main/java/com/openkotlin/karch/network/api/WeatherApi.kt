@@ -1,12 +1,7 @@
 package com.openkotlin.karch.network.api
 
-import com.openkotlin.karch.network.data.BaseResponse
-import com.openkotlin.karch.network.data.rsp.GetWeatherReq
-import com.openkotlin.karch.network.data.rsp.LoginRsp
-import okhttp3.RequestBody
-import retrofit2.http.Body
+import com.openkotlin.karch.network.data.rsp.GetWeatherRsp
 import retrofit2.http.GET
-import retrofit2.http.POST
 
 /**
  *
@@ -24,6 +19,6 @@ interface WeatherApi {
     }
 
     @GET("weather/city/101030100")
-//    suspend fun getWeatherByCity(): BaseResponse<GetWeatherReq>
-    suspend fun getWeatherByCity(): GetWeatherReq
+//    suspend fun getWeatherByCity(): BaseResponse<GetWeatherRsp>
+    suspend fun getWeatherByCity(): GetWeatherRsp
 }

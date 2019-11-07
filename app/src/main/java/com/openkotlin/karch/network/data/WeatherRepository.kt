@@ -1,6 +1,7 @@
 package com.openkotlin.karch.network.data
 
-import com.openkotlin.karch.network.data.client.WeatherRetrofitClient
+import com.openkotlin.karch.network.BaseRetrofitClient
+import com.openkotlin.karch.network.api.WeatherApi
 
 /**
  *
@@ -12,6 +13,10 @@ import com.openkotlin.karch.network.data.client.WeatherRetrofitClient
  *
  */
 class WeatherRepository {
+
+    object WeatherRetrofitClient: BaseRetrofitClient() {
+        val service by lazy { getAPIService(WeatherApi::class.java, WeatherApi.BASE_URL) }
+    }
 
     suspend fun getWeather() = WeatherRetrofitClient.service.getWeatherByCity()
 

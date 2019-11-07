@@ -63,7 +63,7 @@ open class BaseViewModel : ViewModel() {
         catchBlock: suspend CoroutineScope.(e: Throwable) -> Unit = {},
         finallyBlock: suspend CoroutineScope.() -> Unit = {}
     ) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.Main) {
             tryCatch(tryBlock, catchBlock, finallyBlock)
         }
     }

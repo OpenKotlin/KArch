@@ -1,6 +1,7 @@
 package com.openkotlin.karch.network.viewmodels
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.openkotlin.karch.network.data.WeatherRepository
 
 /**
@@ -18,18 +19,20 @@ class WeatherViewModel: BaseViewModel() {
 
     private val repository by lazy { WeatherRepository() }
 
+    var msg: MutableLiveData<String> = MutableLiveData()
 
-    fun getWeather() {
+    init {
+        updateWeatherToView()
+    }
+
+    private fun updateWeatherToView() {
         launchOnIO(
             tryBlock = {
                 Log.d("Tanck", "tryBlock Block")
-                Log.d("Tanck", "tryBlock Block" + repository.getWeather().toString())
-
-
-
-//                    .run {
-//                    Log.d("Tanck", this.toString())
-//                }
+                val serverMsg = repository.getWeather().also {
+                    msg.value = it.message
+                }
+                Log.d("Tanck", "tryBlock Block: $serverMsg")
             },
             catchBlock = {
                 e->handlingExceptions(e)
