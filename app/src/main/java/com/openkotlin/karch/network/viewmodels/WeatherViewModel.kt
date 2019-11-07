@@ -2,9 +2,7 @@ package com.openkotlin.karch.network.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.openkotlin.karch.network.data.WeatherRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import com.openkotlin.karch.network.api.WeatherApi
 
 /**
  *
@@ -18,7 +16,7 @@ import kotlinx.coroutines.withContext
 class WeatherViewModel : BaseViewModel() {
 
 
-    private val repository by lazy { WeatherRepository() }
+    private val repository by lazy { WeatherApi() }
 
     var msg: MutableLiveData<String> = MutableLiveData()
 
@@ -51,12 +49,13 @@ class WeatherViewModel : BaseViewModel() {
 //                    withContext(Dispatchers.Main) { msg.value = it.message }
 //                }
                 // 1. Try with server to get data
-                val serverMsg = repository.getWeather()
+                val serverMsg = repository.getWeatherByCity()
                 // 2. Update the data to live data
                 // Switch to the UI thread
                 msg.postValue(serverMsg.message)
 //                msg.value = serverMsg.message
                 Log.d("Tanck", "tryBlock Block: $serverMsg")
+
             },
             catchBlock = { e ->
                 handlingExceptions(e)
