@@ -14,7 +14,7 @@ import retrofit2.http.GET
  *  Note : N/A
  *
  */
-interface WeatherApi{
+interface WeatherApi {
 
     @GET("weather/city/101030100")
 //    suspend fun getWeatherByCity(): BaseResponse<GetWeatherRsp>
