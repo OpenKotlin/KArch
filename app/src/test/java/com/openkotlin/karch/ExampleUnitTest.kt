@@ -22,5 +22,5 @@ class ExampleUnitTest {
     // HashMap/HashTable 默认是16大小,负载因子是:0.75. 扩容出发为:当前定义的大小*负载因子 > 实际大小
 
 
-    //LinkedList基于链表实现的. ArraryList是基于数组数显的
+    //LinkedList基于链表实现的. ArraryList是基于数组数显的. 由于数组是连续空间,所以当插入操作在第一个的时候,ArraryList性能最差.
 }
